@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dream Analytics - Dream Explainer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="main-content">
+        <div class="container">
+            <h1>Dream Analytics</h1>
+            <p><a href="{{ url_for('dashboard') }}">Back to Dashboard</a></p>
+            <div id="analytics-data">
+                <p>Loading analytics...</p>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', async function() {
+            try {
+                const response = await fetch('/api/analytics');
+                if (!response.ok) {
+                    throw new Error('Failed to load analytics');
+                }
+                const data = await response.json();
+                const analyticsDiv = document.getElementById('analytics-data');
+                analyticsDiv.innerHTML = `
+                    <p><strong>Total Dreams:</strong> ${data.total_dreams}</p>
+                    <h2>Most Common Words:</h2>
+                    <ul>
+                        ${data.common_words.map(word => `<li>${word[0]}: ${word[1]}</li>`).join('')}
+                    </ul>
+                `;
+            } catch (error) {
+                console.error('Error loading analytics:', error);
+                const analyticsDiv = document.getElementById('analytics-data');
+                analyticsDiv.innerHTML = '<p style="color: red;">Could not load analytics data.</p>';
+            }
+        });
+    </script>
+</body>
+</html>

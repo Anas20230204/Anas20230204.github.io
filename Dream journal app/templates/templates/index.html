@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Dream Explainer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="main-content">
+        <header>
+            <nav>
+                <a href="{{ url_for('landing') }}" class="logo">Dream Explainer</a>
+                <ul>
+                    <li><a href="{{ url_for('login') }}">Login</a></li>
+                    <li><a href="{{ url_for('signup') }}" class="btn-primary">Sign Up</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <section class="hero">
+            <div class="container">
+                <h1>Unlock the Secrets of Your Dreams</h1>
+                <p>Your personal AI-powered dream journal and interpreter. Understand the hidden meanings behind your dreams and gain deeper insights into your subconscious mind.</p>
+                <a href="{{ url_for('signup') }}" class="btn-primary">Get Started for Free</a>
+            </div>
+        </section>
+
+        <section class="features">
+            <div class="container">
+                <h2>Why Choose Dream Explainer?</h2>
+                <div class="feature-grid">
+                    <div class="feature">
+                        <h3>AI-Powered Interpretations</h3>
+                        <p>Leverage the power of artificial intelligence to get instant, insightful interpretations of your dreams.</p>
+                    </div>
+                    <div class="feature">
+                        <h3>Personal Dream Journal</h3>
+                        <p>Keep a secure and private journal of all your dreams. Track patterns and recurring themes over time.</p>
+                    </div>
+                    <div class="feature">
+                        <h3>Multi-Language Support</h3>
+                        <p>Get your dream interpretations in multiple languages, including English, Spanish, French, and more.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <div class="container">
+                <p>&copy; 2024 Dream Explainer. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

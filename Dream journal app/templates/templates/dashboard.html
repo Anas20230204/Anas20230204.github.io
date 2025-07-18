@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dream Explainer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v=1.1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+</head>
+<body>
+    <div class="main-content">
+        <div class="container">
+            <h1>Dream Explainer</h1>
+            <p>Welcome, {{ current_user.username }}! <a href="{{ url_for('profile') }}">Profile</a> | <a href="{{ url_for('logout') }}">Logout</a> | <a href="{{ url_for('analytics') }}">View Analytics</a></p>
+            <form id="dream-form">
+                <textarea id="dream-input" placeholder="Tell me your dream..." rows="4"></textarea>
+                <select id="language-select">
+                    <option value="English">English</option>
+                    <option value="Spanish">Spanish</option>
+                    <option value="French">French</option>
+                    <option value="German">German</option>
+                    <option value="Arabic">Arabic</option>
+                </select>
+                <input type="text" id="tags-input" placeholder="Enter tags (comma-separated)">
+                <select id="mood-select">
+                    <option value="">Select a mood</option>
+                    {% for mood in moods %}
+                    <option value="{{ mood.id }}">{{ mood.name }}</option>
+                    {% endfor %}
+                </select>
+                <button type="submit">Explain</button>
+                <button type="button" id="install-button" style="display: none;">Install App</button>
+            </form>
+            <div id="interpretation"></div>
+            <h2>Dream History</h2>
+
+            <div id="history">
+                <!-- History items will be loaded by script.js -->
+            </div>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}?v=1.1"></script>
+    <script>
+        const installButton = document.getElementById('install-button');
+        let deferredPrompt;
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            installButton.style.display = 'block';
+        });
+
+        installButton.addEventListener('click', (e) => {
+            installButton.style.display = 'none';
+            deferredPrompt.prompt();
+            deferredPrompt.userChoice.then((choiceResult) => {
+                if (choiceResult.outcome === 'accepted') {
+                    console.log('User accepted the install prompt');
+                } else {
+                    console.log('User dismissed the install prompt');
+                }
+                deferredPrompt = null;
+            });
+        });
+
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register("{{ url_for('static', filename='sw.js') }}")
+                    .then(registration => {
+                        console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                    }, err => {
+                        console.log('ServiceWorker registration failed: ', err);
+                    });
+            });
+        }
+    </script>
+    <footer>
+        <p>Made By Anas Sarhan</p>
+    </footer>
+</body>
+</html>

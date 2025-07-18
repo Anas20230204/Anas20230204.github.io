@@ -1,0 +1,9 @@
+Flask
+google-generativeai
+python-dotenv
+Flask-SQLAlchemy
+Flask-Login
+Flask-Migrate
+waitress
+gunicorn==22.0.0
+Flask-Mail
