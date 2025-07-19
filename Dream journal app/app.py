@@ -336,3 +336,8 @@ def init_db_command():
     with app.app_context():
         db.create_all()
     print('Initialized the database.')
+from flask import send_from_directory
+
+@app.route('/google481220b0344d2cd7.html')
+def google_verification():
+    return send_from_directory('.', 'google481220b0344d2cd7.html')
