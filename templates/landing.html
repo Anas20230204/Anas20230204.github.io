@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dream Explainer - Understand Your Dreams</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+</head>
+<body>
+    <div class="main-content">
+        <div class="hero">
+            <h1 class="hero-title">Unlock the Secrets of Your Dreams</h1>
+            <p class="hero-subtitle">Your personal AI-powered dream interpreter is here to help you understand the hidden meanings behind your dreams.</p>
+            <a href="{{ url_for('signup') }}" class="btn-primary">Get Started for Free</a>
+        </div>
+    </div>
+
+    <div class="features">
+        <h2 class="section-title">Why Choose Us?</h2>
+        <div class="feature-grid">
+            <div class="feature-item">
+                <h3>Instant Interpretations</h3>
+                <p>Get immediate, AI-driven insights into your dreams. No more waiting or wondering.</p>
+            </div>
+            <div class="feature-item">
+                <h3>Personalized History</h3>
+                <p>Keep a private journal of your dreams and their interpretations to track patterns over time.</p>
+            </div>
+            <div class="feature-item">
+                <h3>Multi-language Support</h3>
+                <p>Our AI can interpret your dreams in a variety of languages. Dream in your native tongue!</p>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2024 Dream Explainer. All rights reserved.</p>
+    </footer>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register("{{ url_for('static', filename='sw.js') }}")
+                    .then(registration => {
+                        console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                    }, err => {
+                        console.log('ServiceWorker registration failed: ', err);
+                    });
+            });
+        }
+    </script>
+</body>
+</html>

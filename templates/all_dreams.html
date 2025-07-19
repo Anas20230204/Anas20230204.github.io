@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Dreams - Dream Explainer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="main-content">
+        <div class="container">
+            <h1>All Dreams</h1>
+            <p><a href="{{ url_for('dashboard') }}">Back to Dashboard</a></p>
+            <div id="dreams-list">
+                {% for dream in dreams %}
+                    <div class="history-item">
+                        <p><strong>Dream:</strong> {{ dream.dream_text }}</p>
+                        <p><strong>Interpretation:</strong> {{ dream.interpretation }}</p>
+                        <p><strong>Tags:</strong> {{ dream.tags|map(attribute='name')|join(', ') }}</p>
+                        <p><strong>Mood:</strong> {{ dream.mood.name if dream.mood else 'N/A' }}</p>
+                        <p><em>By: {{ dream.author.username }}</em></p>
+                    </div>
+                {% else %}
+                    <p>No dreams found.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,7 @@
+Flask
+google-generativeai
+python-dotenv
+Flask-SQLAlchemy
+Flask-Login
+Flask-Migrate
+waitress
