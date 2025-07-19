@@ -341,3 +341,8 @@ from flask import send_from_directory
 @app.route('/google481220b0344d2cd7.html')
 def google_verification():
     return send_from_directory('.', 'google481220b0344d2cd7.html')
+from flask import send_from_directory
+
+@app.route('/sitemap.xml')
+def sitemap():
+    return send_from_directory('.', 'sitemap.xml', mimetype='application/xml')
